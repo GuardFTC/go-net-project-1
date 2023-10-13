@@ -19,8 +19,8 @@ type Grade struct {
 // GradeDto 年级DTO
 type GradeDto struct {
 	IndexCn string `json:"indexCn" form:"indexCn" binding:"required,min=1,max=64"`
-	mu      sync.RWMutex
 	*base.BaseDto
+	mu sync.RWMutex
 }
 
 // SaveGrade 保存年级

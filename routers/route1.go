@@ -28,4 +28,10 @@ func InitRoutersV1() {
 		grade.PUT("/:id", handler.UpdateGrade)
 		grade.GET("", handler.PageGrade)
 	}
+
+	//3.声明第一版班级路由
+	{
+		classes := v1.Group("/:gradeId/classes")
+		classes.POST("", handler.AddClass)
+	}
 }

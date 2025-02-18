@@ -19,19 +19,20 @@ func InitRoutersV1() {
 	//1.v1使用全局异常处理
 	v1.Use(global.ExceptionHandler)
 
-	//2.声明第一版年级路由
 	{
+		//2.声明第一版年级路由
 		grade := v1.Group("grades")
 		grade.POST("", handler.AddGrade)
 		grade.DELETE("/:id", handler.DeleteGrade)
 		grade.GET("/:id", handler.GetGrade)
 		grade.PUT("/:id", handler.UpdateGrade)
 		grade.GET("", handler.PageGrade)
-	}
 
-	//3.声明第一版班级路由
-	{
-		classes := v1.Group("/:gradeId/classes")
+		//3.声明第一版班级路由
+		classes := grade.Group("/:id/classes")
 		classes.POST("", handler.AddClass)
+		classes.DELETE("/:classId", handler.DeleteClass)
+		classes.GET("/:classId", handler.GetClass)
+		classes.PUT("/:classId", handler.GetClass)
 	}
 }

@@ -47,3 +47,38 @@ func (c *ClassDto) AddClass() *ClassDto {
 	//6.返回
 	return c
 }
+
+// DeleteClass 删除班级
+func (c *ClassDto) DeleteClass() {
+
+	//1.查询班级数据
+	var class *Class
+	utils.CheckDbResult(base.DB.First(&class, c.ID))
+
+	//2.比较年级数据
+	if class.GradeId != c.GradeId {
+		return
+	}
+
+	//3.删除
+	utils.CheckDbResult(base.DB.Delete(&class))
+}
+
+// GetClass 查询班级
+func (c *ClassDto) GetClass() *ClassDto {
+
+	//1.查询班级数据
+	var class *Class
+	utils.CheckDbResult(base.DB.First(&class, c.ID))
+
+	//2.比较年级数据
+	if class.GradeId != c.GradeId {
+		panic("db operate error:[record not found]")
+	}
+
+	//3.PO->DTO
+	c.IndexCn = class.IndexCn
+
+	//4.返回
+	return c
+}
